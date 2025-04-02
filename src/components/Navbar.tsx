@@ -1,13 +1,12 @@
-
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { name: 'Home', href: '#' },
-  { name: 'Features', href: '#features' },
-  { name: 'Demo', href: '#demo' },
-  { name: 'Contact', href: '#contact' }, // This now points to the contact section instead of footer
+  { name: "Home", href: "#" },
+  { name: "Features", href: "#features" },
+  { name: "Testimonials", href: "#demo" },
+  { name: "Contact", href: "#contact" }, // This now points to the contact section instead of footer
 ];
 
 const Navbar = () => {
@@ -23,28 +22,28 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Handle smooth scrolling for anchor links
   const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const href = e.currentTarget.getAttribute('href');
-    if (!href || href === '#') {
+    const href = e.currentTarget.getAttribute("href");
+    if (!href || href === "#") {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     } else {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({
-          behavior: 'smooth',
+          behavior: "smooth",
         });
       }
     }
-    
+
     // Close mobile menu if open
     if (isMenuOpen) {
       setIsMenuOpen(false);
@@ -52,15 +51,31 @@ const Navbar = () => {
   };
 
   return (
-    <header className={cn(
-      'fixed w-full z-50 transition-all duration-300',
-      isScrolled ? 'glassmorphism py-3' : 'py-5'
-    )}>
+    <header
+      className={cn(
+        "fixed w-full z-50 transition-all duration-300",
+        isScrolled ? "glassmorphism py-3" : "py-5"
+      )}
+    >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <a href="#" className="flex items-center" onClick={handleNavLinkClick}>
-              <span className="text-2xl font-bold text-gradient">BlockChain</span>
+            <a
+              href="#"
+              className="flex flex-col items-center text-center"
+              onClick={handleNavLinkClick}
+            >
+              <div className="flex items-center">
+                <span className="text-2xl font-bold text-gradient">
+                  SmartBlock
+                </span>
+                <span className="text-xl font-light text-gradient ml-1">
+                  by Vortex
+                </span>
+              </div>
+              <span className="text-sm text-gray-400">
+                Innovating the Future
+              </span>
             </a>
           </div>
 

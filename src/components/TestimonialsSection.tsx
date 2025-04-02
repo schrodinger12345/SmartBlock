@@ -78,15 +78,15 @@ const TestimonialsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Testimonial
             quote="This platform revolutionized how I approach crypto trading. The AI recommendations have consistently outperformed my expectations."
-            author="Sarah Johnson"
+            author="Om Kute"
             position="Crypto Investor"
             delay="0ms"
           />
           <Testimonial
             quote="Zero fees is a game-changer. I've saved thousands in transaction costs while the smart contract security gives me peace of mind."
-            author="Michael Chen"
+            author="Aryan Tambe"
             position="Tech Entrepreneur"
-            delay="300ms"
+            delay="200ms"
           />
         </div>
       </div>
