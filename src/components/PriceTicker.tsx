@@ -1,18 +1,89 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+
+interface CryptoPrice {
+  symbol: string;
+  price: string;
+  change: 'up' | 'down' | 'neutral';
+}
 
 const PriceTicker = () => {
-  const tickerItems = [
-    { symbol: "BTC", price: "63,420", change: "up" },
-    { symbol: "ETH", price: "3,180", change: "down" },
-    { symbol: "SOL", price: "150", change: "up" },
-    { symbol: "DOT", price: "29", change: "up" },
-    { symbol: "ADA", price: "0.45", change: "down" },
-    { symbol: "AVAX", price: "38", change: "up" },
-  ];
+  const [prices, setPrices] = useState<CryptoPrice[]>([
+    { symbol: "BTC", price: "Loading...", change: "neutral" },
+    { symbol: "ETH", price: "Loading...", change: "neutral" },
+    { symbol: "SOL", price: "Loading...", change: "neutral" },
+    { symbol: "DOT", price: "Loading...", change: "neutral" },
+    { symbol: "ADA", price: "Loading...", change: "neutral" },
+    { symbol: "AVAX", price: "Loading...", change: "neutral" },
+  ]);
+  
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCryptoPrices = async () => {
+      try {
+        // CoinGecko Free API
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,polkadot,cardano,avalanche-2&vs_currencies=usd&include_24hr_change=true');
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch crypto prices');
+        }
+        
+        const data = await response.json();
+        
+        const updatedPrices: CryptoPrice[] = [
+          { 
+            symbol: "BTC", 
+            price: data.bitcoin.usd.toLocaleString(), 
+            change: data.bitcoin.usd_24h_change > 0 ? "up" : "down" 
+          },
+          { 
+            symbol: "ETH", 
+            price: data.ethereum.usd.toLocaleString(), 
+            change: data.ethereum.usd_24h_change > 0 ? "up" : "down" 
+          },
+          { 
+            symbol: "SOL", 
+            price: data.solana.usd.toLocaleString(), 
+            change: data.solana.usd_24h_change > 0 ? "up" : "down" 
+          },
+          { 
+            symbol: "DOT", 
+            price: data.polkadot.usd.toLocaleString(), 
+            change: data.polkadot.usd_24h_change > 0 ? "up" : "down" 
+          },
+          { 
+            symbol: "ADA", 
+            price: data.cardano.usd.toLocaleString(), 
+            change: data.cardano.usd_24h_change > 0 ? "up" : "down" 
+          },
+          { 
+            symbol: "AVAX", 
+            price: data['avalanche-2'].usd.toLocaleString(), 
+            change: data['avalanche-2'].usd_24h_change > 0 ? "up" : "down" 
+          },
+        ];
+        
+        setPrices(updatedPrices);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching crypto prices:', error);
+        toast.error('Failed to fetch latest crypto prices');
+        setLoading(false);
+      }
+    };
+
+    fetchCryptoPrices();
+    
+    // Refresh prices every 2 minutes
+    const intervalId = setInterval(fetchCryptoPrices, 120000);
+    
+    return () => clearInterval(intervalId);
+  }, []);
   
   // Double the items to create a seamless infinite loop
-  const doubledItems = [...tickerItems, ...tickerItems];
+  const doubledItems = [...prices, ...prices];
 
   return (
     <section id="demo" className="py-10 overflow-hidden bg-darkblue/50">
@@ -23,9 +94,14 @@ const PriceTicker = () => {
               {doubledItems.map((item, index) => (
                 <span key={index} className="inline-block mx-4">
                   <strong className="text-white">{item.symbol}:</strong>{" "}
-                  <span className="text-electricblue">${item.price}</span>{" "}
-                  <span className={item.change === "up" ? "text-green-400" : "text-red-400"}>
-                    {item.change === "up" ? "↗" : "↘"}
+                  <span className="text-electricblue">
+                    ${loading ? "Loading..." : item.price}
+                  </span>{" "}
+                  <span className={
+                    item.change === "up" ? "text-green-400" : 
+                    item.change === "down" ? "text-red-400" : "text-gray-400"
+                  }>
+                    {item.change === "up" ? "↗" : item.change === "down" ? "↘" : "–"}
                   </span>
                 </span>
               ))}

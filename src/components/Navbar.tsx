@@ -7,7 +7,7 @@ const navLinks = [
   { name: 'Home', href: '#' },
   { name: 'Features', href: '#features' },
   { name: 'Demo', href: '#demo' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Contact', href: '#contact' }, // This now points to the contact section instead of footer
 ];
 
 const Navbar = () => {
@@ -27,6 +27,30 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle smooth scrolling for anchor links
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute('href');
+    if (!href || href === '#') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+    }
+    
+    // Close mobile menu if open
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <header className={cn(
       'fixed w-full z-50 transition-all duration-300',
@@ -35,7 +59,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <a href="#" className="flex items-center">
+            <a href="#" className="flex items-center" onClick={handleNavLinkClick}>
               <span className="text-2xl font-bold text-gradient">BlockChain</span>
             </a>
           </div>
@@ -47,6 +71,7 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 className="text-gray-200 hover:text-electricblue transition-colors"
+                onClick={handleNavLinkClick}
               >
                 {link.name}
               </a>
@@ -80,7 +105,7 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 className="text-2xl text-gray-200 hover:text-electricblue transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={handleNavLinkClick}
               >
                 {link.name}
               </a>
