@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -6,7 +7,7 @@ const navLinks = [
   { name: "Home", href: "#" },
   { name: "Features", href: "#features" },
   { name: "Testimonials", href: "#demo" },
-  { name: "Contact", href: "#contact" }, // This now points to the contact section instead of footer
+  { name: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -62,7 +63,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <a
               href="#"
-              className="flex flex-col items-center text-center"
+              className="flex flex-col items-center text-center navbar-font"
               onClick={handleNavLinkClick}
             >
               <div className="flex items-center">
@@ -80,7 +81,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-8 navbar-font">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -95,9 +96,9 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden flex items-center"
-            onClick={() => setIsMenuOpen(true)}
-            aria-label="Open menu"
+            className="md:hidden flex items-center p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             <Menu className="h-6 w-6 text-gray-200" />
           </button>
@@ -106,10 +107,10 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-darkblue flex flex-col items-center justify-center z-50">
+        <div className="fixed inset-0 bg-darkblue flex flex-col items-center justify-center z-50 navbar-font">
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="absolute top-6 right-6"
+            className="absolute top-6 right-6 p-2"
             aria-label="Close menu"
           >
             <X className="h-8 w-8 text-gray-200" />

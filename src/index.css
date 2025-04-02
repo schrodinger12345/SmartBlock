@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -75,12 +76,16 @@
   }
   
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
     scroll-behavior: smooth;
   }
   
   body {
-    @apply bg-darkblue text-white;
+    @apply bg-darkblue text-white font-poppins;
+  }
+
+  .navbar-font {
+    font-family: 'Inter', sans-serif;
   }
 
   .glassmorphism {
