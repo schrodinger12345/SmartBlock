@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center">
           <a href="#" className="mb-6">
-            <span className="text-2xl font-bold text-gradient">BlockChain</span>
+            <span className="text-2xl font-bold text-gradient"></span>
           </a>
           
           <div className="flex space-x-6 mb-6">
@@ -39,7 +39,7 @@ const Footer = () => {
           </div>
           
           <p className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} BlockChain. All rights reserved.
+            &copy; {new Date().getFullYear()} SmartBlock. All rights reserved.
           </p>
           
           {/* Hidden judge bonus div */}

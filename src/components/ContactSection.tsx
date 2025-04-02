@@ -22,10 +22,10 @@ const ContactSection = () => {
                 <h3 className="text-xl font-semibold">Support</h3>
               </div>
               <a 
-                href="mailto:support@blockchain.com" 
+                href="mailto:support@smartblock.com" 
                 className="text-gray-300 hover:text-electricblue transition-colors"
               >
-                support@blockchain.com
+                support@smartblock.com
               </a>
               <p className="mt-3 text-sm text-gray-400">
                 Get help with your account, transactions, or technical issues
@@ -38,10 +38,10 @@ const ContactSection = () => {
                 <h3 className="text-xl font-semibold">Executive Team</h3>
               </div>
               <a 
-                href="mailto:ceo@blockchain.com" 
+                href="mailto:ceo@smartblock.com" 
                 className="relative group text-gray-300 hover:text-electricblue transition-colors"
               >
-                ceo@blockchain.com
+                ceo@smartblock.com
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-electricblue group-hover:w-full transition-all duration-300"></span>
               </a>
               <p className="mt-3 text-sm text-gray-400">
