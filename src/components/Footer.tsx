@@ -44,7 +44,7 @@ const Footer = () => {
           
           {/* Hidden judge bonus div */}
           <div className="hidden">
-            <!-- Built for Blockchain Hackathon by BlockChain Developer -->
+            {/* Built for Blockchain Hackathon by BlockChain Developer */}
           </div>
         </div>
       </div>
