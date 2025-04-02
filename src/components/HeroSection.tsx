@@ -1,12 +1,13 @@
 
 import React, { useEffect, useRef } from 'react';
 import AbstractShape from './AbstractShape';
+import { Button } from "./ui/button";
 
 const HeroSection = () => {
   // References for animation
   const heading1 = useRef<HTMLHeadingElement>(null);
   const heading2 = useRef<HTMLHeadingElement>(null);
-  const button = useRef<HTMLButtonElement>(null);
+  const button = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Apply animation classes after component mount
@@ -75,12 +76,13 @@ const HeroSection = () => {
             >
               Trade with zero fees. Powered by AI.
             </h2>
-            <button
-              ref={button}
-              className="px-8 py-3 bg-electricblue text-darkblue font-semibold rounded-md hover:scale-105 transition-all duration-300 hover:animate-glow opacity-0"
-            >
-              Get Early Access
-            </button>
+            <div ref={button} className="opacity-0">
+              <Button 
+                className="bg-electricblue hover:bg-darkblue border-2 border-electricblue text-darkblue hover:text-electricblue font-semibold rounded-md transition-all duration-300 hover:shadow-glow"
+              >
+                Get Early Access
+              </Button>
+            </div>
           </div>
           
           {/* Right Column */}

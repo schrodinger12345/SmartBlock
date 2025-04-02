@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -100,6 +99,9 @@ export default {
 			},
 			backgroundImage: {
 				'hero-gradient': 'linear-gradient(90deg, #00f5d0, #3a80ff)',
+			},
+			boxShadow: {
+				'glow': '0 0 15px rgba(0, 245, 208, 0.6)',
 			},
 		}
 	},
